@@ -4,6 +4,9 @@ import java.io.*;
 public class Employee {
 
     public void mail() throws IOException {
+        PrintWriter writeToFile = new PrintWriter(new FileOutputStream(
+                new File("c://emails.txt"),
+                true));
         System.out.println("Enter your name: ");
         Scanner in = new Scanner(System.in);
         String name = in.next();
@@ -15,19 +18,16 @@ public class Employee {
         String textLine = bufferedReader.readLine();
         int i = 0;
         do {
-           textLine = bufferedReader.readLine();
             if (email.equals(textLine)) {
                 System.out.println("We add digit to your email because you are next person with same name and surname");
                 i++;
                 email = surname + "." + name + Integer.toString(i) + "@mex.com";
+                textLine = bufferedReader.readLine();
             }
         } while (textLine != null);
         bufferedReader.close();
 
         System.out.println("Your email address: " + email);
-        PrintWriter writeToFile = new PrintWriter(new FileOutputStream(
-                new File("c://emails.txt"),
-                true));
         writeToFile.println(email);
         writeToFile.close();
     }
